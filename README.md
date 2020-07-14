@@ -49,43 +49,43 @@ deployement is successful.
 
 #### Dashboard to search and view DFU level debug information from any remote DB server.
 
-<img src="raw/sample/screenshot-1.png?at=refs%2Fheads%2Fmaster" width="1200">
+<img src="sample/screenshot-1.png" width="1200">
 
 
 
 #### Enable or disable features as per requirement
 
-<img src="raw/sample/screenshot-2.png?at=refs%2Fheads%2Fmaster" width="1200">
+<img src="sample/screenshot-2.png" width="1200">
 
 
 
 #### Select and zoom in on a specific period
 
-<img src="raw/sample/screenshot-3.png?at=refs%2Fheads%2Fmaster" width="1200">
+<img src="sample/screenshot-3.png" width="1200">
 
 
 
 #### Reference plot to know where you are at while zooming
 
-<img src="raw/sample/screenshot-4.png?at=refs%2Fheads%2Fmaster" width="1200">
+<img src="sample/screenshot-4.png" width="1200">
 
 
 
 #### View all the essential control parameters in one place
 
-<img src="raw/sample/screenshot-5.png?at=refs%2Fheads%2Fmaster" width="1200">
+<img src="sample/screenshot-5.png" width="1200">
 
 
 
 #### View, sort & filter through the model configuration
 
-<img src="raw/sample/screenshot-6.png?at=refs%2Fheads%2Fmaster" width="1200">
+<img src="sample/screenshot-6.png" width="1200">
 
 
 
 #### Mask existing DFU or set of DFUs based on custom SQL query from a remote DB
 
-<img src="raw/sample/screenshot-7.png?at=refs%2Fheads%2Fmaster" width="1200">
+<img src="sample/screenshot-7.png" width="1200">
 
 ## Built With
 
