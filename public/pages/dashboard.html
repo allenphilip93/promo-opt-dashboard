@@ -1,0 +1,497 @@
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <div class="content-header">
+            <div class="container-fluid">
+            <div class="row mb-2">
+                <!-- <form role="form" ng-submit="submit()" enctype="multipart/form-data" id="js-upload-form"> -->
+                <div class="col-sm-2">
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="fas fa-box"></i></span>
+                        </div>
+                        <input ng-model="data.dmdunit" name="dmdunit" type="text" class="form-control" placeholder="Dmdunit" value="{{dfu.config.dmdunit}}">
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="fas fa-tags"></i></span>
+                        </div>
+                        <input ng-model="data.dmdgroup" name="dmdgroup" type="text" class="form-control" placeholder="Dmdgroup" value="{{dfu.config.dmdgroup}}">
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="fas fa-map-marker-alt"></i></span>
+                        </div>
+                        <input ng-model="data.loc" name="loc" type="text" class="form-control" placeholder="Loc" value="{{dfu.config.loc}}">
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <button class="btn btn-secondary" align="center" style="width:150px">Reset</button>
+                </div>
+                <!-- </form> -->
+                <!-- /.col -->
+                <div class="col-sm-4">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item active">Dashboard</li>
+                </ol>
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+            <div class="row mb-2">
+                <!-- <form role="form" ng-submit="submit()" enctype="multipart/form-data" id="js-upload-form"> -->
+                <div class="col-sm-2">
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="fas fa-users"></i></span>
+                        </div>
+                        <input ng-model="data.ora_username" name="ora_username" type="text" class="form-control" placeholder="Schema" 
+                            value="{{dfu.config.ora_username}}">
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                        </div>
+                        <input ng-model="data.ora_password" id="ora_password" name="ora_password" type="text" class="form-control" placeholder="Password"
+                            value="{{dfu.config.ora_password}}">
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="fas fa-database"></i></span>
+                        </div>
+                        <input ng-model="data.ora_connectionString" name="ora_connectionString" type="text" class="form-control" placeholder="Connection String"
+                            value="{{dfu.config.ora_connectionString}}">
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <button ng-click="submit()" class="btn btn-info" align="center" style="width:150px">Load</button>
+                </div>
+                <!-- </form> -->
+                <!-- /.col -->
+            </div><!-- /.row -->
+            </div><!-- /.container-fluid -->
+        </div>
+        <!-- /.content-header -->
+        <!-- Main content -->
+        <section class="content" ng-show="dfu.feature">
+            <div class="container-fluid">
+    
+            <div class="row">
+                <div class="col-md-12">
+                <div class="card">
+                    <div class="overlay dark hide" id="uplot-spinner">
+                        <i class="fas fa-3x fas fa-cog fa-spin"></i>
+                    </div>
+                    <div class="card-header">
+                    <h5 class="card-title">DFU Time Series</h5>
+    
+                    <div class="card-tools">
+                        <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                        <i class="fas fa-minus"></i>
+                        </button>
+                        <button type="button" class="btn btn-tool" data-card-widget="remove">
+                        <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <!-- <div class="chart chart-container" style="position: relative; height:60vh; width:80vw"> -->
+                            <div id = "uPlotChart">
+                                <!-- Sales Chart Canvas -->
+                                <!-- <canvas id="canvas"></canvas> -->
+                            </div>
+                        </div>
+                        <!-- /.chart-responsive -->
+                        </div>
+                        <!-- /.col -->
+                    </div>
+                    <!-- /.row -->
+                    </div>
+                    <!-- ./card-body -->
+                    <div class="card-footer">
+                    <div class="row">
+                        <div class="col-sm-2 col-4">
+                        <div class="description-block border-right">
+                            <div class="overlay dark summary-spinner hide">
+                                <i class="fas fa-2x fas fa-cog fa-spin"></i>
+                            </div>
+                            <h5 class="description-header">{{ dfu.summary.accuracy }}%</h5>
+                            <span class="description-text">ACCURACY</span>
+                        </div>
+                        <!-- /.description-block -->
+                        </div>
+                        <!-- /.col -->
+                        <div class="col-sm-2 col-4">
+                        <div class="description-block border-right">
+                            <div class="overlay dark summary-spinner hide">
+                                <i class="fas fa-2x fas fa-cog fa-spin"></i>
+                            </div>
+                            <h5 class="description-header">{{ dfu.summary.bias }}%</h5>
+                            <span class="description-text">BIAS</span>
+                        </div>
+                        <!-- /.description-block -->
+                        </div>
+                        <!-- /.col -->
+                        <div class="col-sm-2 col-4">
+                        <div class="description-block border-right">
+                            <div class="overlay dark summary-spinner hide">
+                                <i class="fas fa-2x fas fa-cog fa-spin"></i>
+                            </div>
+                            <h5 class="description-header">{{ dfu.summary.rsquared }}</h5>
+                            <span class="description-text">RSQUARED</span>
+                        </div>
+                        <!-- /.description-block -->
+                        </div>
+                        <!-- /.col -->
+                        <div class="col-sm-2 col-4">
+                        <div class="description-block">
+                            <div class="overlay dark summary-spinner hide">
+                                <i class="fas fa-2x fas fa-cog fa-spin"></i>
+                            </div>
+                            <h5 class="description-header">{{ dfu.summary.wmape }}</h5>
+                            <span class="description-text">WMAPE</span>
+                        </div>
+                        <!-- /.description-block -->
+                        </div>
+                        <!-- /.col -->
+                        <div class="col-sm-2 col-4">
+                        <div class="description-block border-right">
+                            <div class="overlay dark summary-spinner hide">
+                                <i class="fas fa-2x fas fa-cog fa-spin"></i>
+                            </div>
+                            <h5 class="description-header">{{ dfu.summary.mean }}</h5>
+                            <span class="description-text">MEAN</span>
+                        </div>
+                        <!-- /.description-block -->
+                        </div>
+                        <!-- /.col -->
+                        <div class="col-sm-2 col-4">
+                        <div class="description-block">
+                            <div class="overlay dark summary-spinner hide">
+                                <i class="fas fa-2x fas fa-cog fa-spin"></i>
+                            </div>
+                            <h5 class="description-header">{{ dfu.summary.trainingtime }}ms</h5>
+                            <span class="description-text">TRAINING TIME</span>
+                        </div>
+                        <!-- /.description-block -->
+                        </div>
+                    </div>
+                    <!-- /.row -->
+                    <hr>
+                    <div class="row">
+                            <div class="col-sm-2 col-4">
+                            <div class="description-block border-right">
+                                <div class="overlay dark summary-spinner hide">
+                                    <i class="fas fa-2x fas fa-cog fa-spin"></i>
+                                </div>
+                                <h5 class="description-header">{{ dfu.summary.adjrsquared }}%</h5>
+                                <span class="description-text">ADJUSTED RSQUARED</span>
+                            </div>
+                            <!-- /.description-block -->
+                            </div>
+                            <!-- /.col -->
+                            <div class="col-sm-2 col-4">
+                            <div class="description-block border-right">
+                                <div class="overlay dark summary-spinner hide">
+                                    <i class="fas fa-2x fas fa-cog fa-spin"></i>
+                                </div>
+                                <h5 class="description-header">{{ dfu.summary.durbinwatsonstat }}%</h5>
+                                <span class="description-text">DURBIN WATSON</span>
+                            </div>
+                            <!-- /.description-block -->
+                            </div>
+                            <!-- /.col -->
+                            <div class="col-sm-2 col-4">
+                            <div class="description-block border-right">
+                                <div class="overlay dark summary-spinner hide">
+                                    <i class="fas fa-2x fas fa-cog fa-spin"></i>
+                                </div>
+                                <h5 class="description-header">{{ dfu.summary.mse }}</h5>
+                                <span class="description-text">MSE</span>
+                            </div>
+                            <!-- /.description-block -->
+                            </div>
+                            <!-- /.col -->
+                            <div class="col-sm-2 col-4">
+                            <div class="description-block">
+                                <div class="overlay dark summary-spinner hide">
+                                    <i class="fas fa-2x fas fa-cog fa-spin"></i>
+                                </div>
+                                <h5 class="description-header">{{ dfu.summary.se }}</h5>
+                                <span class="description-text">STD ERROR</span>
+                            </div>
+                            <!-- /.description-block -->
+                            </div>
+                            <!-- /.col -->
+                            <div class="col-sm-2 col-4">
+                            <div class="description-block border-right">
+                                <div class="overlay dark summary-spinner hide">
+                                    <i class="fas fa-2x fas fa-cog fa-spin"></i>
+                                </div>
+                                <h5 class="description-header">{{ dfu.summary.smape }}</h5>
+                                <span class="description-text">SMAPE</span>
+                            </div>
+                            <!-- /.description-block -->
+                            </div>
+                            <!-- /.col -->
+                            <div class="col-sm-2 col-4">
+                            <div class="description-block">
+                                <div class="overlay dark summary-spinner hide">
+                                    <i class="fas fa-2x fas fa-cog fa-spin"></i>
+                                </div>
+                                <h5 class="description-header">{{ dfu.feature[0].data.length }}</h5>
+                                <span class="description-text">REGRESSION POINTS</span>
+                            </div>
+                            <!-- /.description-block -->
+                            </div>
+                        </div>
+                        <!-- /.row -->
+                    </div>
+                    <!-- /.card-footer -->
+                </div>
+                <!-- /.card -->
+                </div>
+                <!-- /.col -->
+            </div>
+            <!-- /.row -->
+    
+            <!-- Main row -->
+            <div class="row">
+                <div class="col-md-5">
+                <!-- DIRECT CHAT -->
+                <div class="card">
+                    <div class="overlay dark hide" id="pgp-spinner">
+                        <i class="fas fa-3x fas fa-cog fa-spin"></i>
+                    </div>
+                    <div class="card-header border-transparent">
+                    <h3 class="card-title">Price Global Parameters</h3>
+    
+                    <div class="card-tools">
+                        <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                        <i class="fas fa-minus"></i>
+                        </button>
+                        <button type="button" class="btn btn-tool" data-card-widget="remove">
+                        <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body p-0">
+                    <div class="table-responsive" style="height: 300px;">
+                        <table class="table table-striped table-head-fixed text-nowrap m-0">
+                        <thead>
+                        <tr>
+                            <th>Parameter</th>
+                            <th>Value</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="config in dfu.pgps">
+                                <td>{{config.name}}</td>
+                                <td>{{config.value}}</td>
+                            </tr>
+                        </tbody>
+                        </table>
+                    </div>
+                    <!-- /.table-responsive -->
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+                <!--/.direct-chat -->
+                </div>
+                <!-- /.col -->
+                <div class="col-md-3">   
+                <div class="card">
+                    <div class="overlay dark hide" id="nodeconfig-spinner">
+                        <i class="fas fa-3x fas fa-cog fa-spin"></i>
+                    </div>
+                    <div class="card-header border-transparent">
+                    <h3 class="card-title">SRE Node Config Parameters</h3>
+    
+                    <div class="card-tools">
+                        <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                        <i class="fas fa-minus"></i>
+                        </button>
+                        <button type="button" class="btn btn-tool" data-card-widget="remove">
+                        <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body p-0">
+                    <div class="table-responsive" style="height: 300px;">
+                        <table class="table table-striped table-head-fixed text-nowrap m-0">
+                        <thead>
+                        <tr>
+                            <th>Parameter</th>
+                            <th>Value</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="config in dfu.nodeProps">
+                                <td>{{config[0]}}</td>
+                                <td>{{config[1]}}</td>
+                            </tr>
+                        </tbody>
+                        </table>
+                    </div>
+                    <!-- /.table-responsive -->
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+                </div>
+                <!-- /.col -->
+                <div class="col-md-4">   
+                <div class="card">
+                    <div class="overlay dark hide" id="exception-spinner">
+                        <i class="fas fa-3x fas fa-cog fa-spin"></i>
+                    </div>
+                    <div class="card-header border-transparent">
+                    <h3 class="card-title">Exceptions</h3>
+    
+                    <div class="card-tools">
+                        <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                        <i class="fas fa-minus"></i>
+                        </button>
+                        <button type="button" class="btn btn-tool" data-card-widget="remove">
+                        <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body p-0">
+                    <div class="table-responsive" style="height: 300px;">
+                        <table class="table table-striped table-head-fixed text-nowrap m-0">
+                        <thead>
+                        <tr>
+                            <th>Exception</th>
+                            <th>Details</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="exeception in dfu.exceptions">
+                                <td>{{exeception[0]}}</td>
+                                <td>{{exeception[1]}}</td>
+                            </tr>
+                        </tbody>
+                        </table>
+                    </div>
+                    <!-- /.table-responsive -->
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+                </div>
+                <!-- /.col -->
+            </div>
+            <div class="row">
+                <div class="col-md-10">
+                <!-- TABLE: LATEST ORDERS -->
+                <div class="card">
+                    <div class="overlay dark hide" id="modelconfig-spinner">
+                        <i class="fas fa-3x fas fa-cog fa-spin"></i>
+                    </div>
+                    <div class="card-header">
+                        <h3 class="card-title">Model Configuration</h3>
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body">
+                        <table id="modelconfigtable" class="table table-bordered table-hover">
+                        <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Type</th>
+                            <th>Value</th>
+                            <th>Force SW</th>
+                            <th>Gap Fill Method</th>
+                            <th>Priority</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="config in dfu.modelconfig">
+                            <td>{{config.name}}</td>
+                            <td>{{config.type}}</td>
+                            <td>{{config.value}}</td>
+                            <td>{{config.forcesw}}</td>
+                            <td>{{config.gapfillmethod}}</td>
+                            <td>{{config.priority}}</td>
+                        </tr>
+                        </table>
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+                </div>
+                <!-- /.col -->
+    
+                <div class="col-md-2">
+                <div class="info-box mb-3 bg-danger">
+                    <div class="overlay dark summary-spinner hide">
+                        <i class="fas fa-2x fas fa-cog fa-spin"></i>
+                    </div>
+                    <span class="info-box-icon"><i class="fas fa-cloud-download-alt"></i></span>
+    
+                    <div class="info-box-content">
+                    <span class="info-box-text">Errors</span>
+                    <span class="info-box-number">0</span>
+                    </div>
+                    <!-- /.info-box-content -->
+                </div>
+                <!-- /.info-box -->
+                <!-- Info Boxes Style 2 -->
+                <div class="info-box mb-3 bg-warning">
+                    <div class="overlay dark summary-spinner hide">
+                        <i class="fas fa-2x fas fa-cog fa-spin"></i>
+                    </div>
+                    <span class="info-box-icon"><i class="fas fa-tag"></i></span>
+    
+                    <div class="info-box-content">
+                    <span class="info-box-text">Warnings</span>
+                    <span class="info-box-number">0</span>
+                    </div>
+                    <!-- /.info-box-content -->
+                </div>
+                <!-- /.info-box -->
+                <div class="info-box mb-3 bg-info">
+                    <div class="overlay dark summary-spinner hide">
+                        <i class="fas fa-2x fas fa-cog fa-spin"></i>
+                    </div>
+                    <span class="info-box-icon"><i class="far fa-comment"></i></span>
+    
+                    <div class="info-box-content">
+                    <span class="info-box-text">Debug Info</span>
+                    <span class="info-box-number">0</span>
+                    </div>
+                    <!-- /.info-box-content -->
+                </div>
+                <!-- /.info-box -->
+                <div class="info-box mb-3 bg-success">
+                    <div class="overlay dark summary-spinner hide">
+                        <i class="fas fa-2x fas fa-cog fa-spin"></i>
+                    </div>
+                    <span class="info-box-icon"><i class="far fa-heart"></i></span>
+    
+                    <div class="info-box-content">
+                    <span class="info-box-text">Information</span>
+                    <span class="info-box-number">0</span>
+                    </div>
+                    <!-- /.info-box-content -->
+                </div>
+                <!-- /.info-box -->
+                </div>
+            </div>
+            <!-- /.row -->
+    
+            </div><!--/. container-fluid -->
+        </section>
+        <!-- /.content -->
+    </div>

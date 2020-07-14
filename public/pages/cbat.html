@@ -1,0 +1,220 @@
+<!-- cbat.html -->
+<!-- <div class="jumbotron text-center">
+    <h1>CBAT Page</h1>
+
+    <p>{{ message }}</p>
+</div> -->
+
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+        <!-- Content Header (Page header) -->    
+        <section class="content-header">
+            <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                <h1>CBAT Data Generator</h1>
+                </div>
+                <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item active">CBAT Data Generator</li>
+                </ol>
+                </div>
+            </div>
+            </div><!-- /.container-fluid -->
+        </section>
+    
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row">
+                <!-- left column -->
+                <div class="col-md-7">
+                    <!-- general form elements disabled -->
+                    <div class="card card-info" id="cbatform">
+                        <div class="overlay dark hide" id="cbatform-spinner">
+                            <i class="fas fa-3x fas fa-cog fa-spin"></i>
+                        </div>
+                        <div class="card-header">
+                        <h3 class="card-title">CBAT Data Generator</h3>
+                        </div>
+                        <form role="form" ng-submit="submit()" enctype="multipart/form-data" id="js-upload-form">
+                        <!-- /.card-header -->
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fas fa-box"></i></span>
+                                        </div>
+                                        <input ng-model="data.dmdunit" name="dmdunit" type="text" class="form-control" placeholder="Dmdunit">
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fas fa-box"></i></span>
+                                        </div>
+                                        <input ng-model="data.mask_dmdunit" name="mask_dmdunit" type="text" class="form-control" placeholder="Mask Dmdunit Prefix" 
+                                            value="{{cbatres.form.mask_dmdunit}}">
+                                    </div>
+                                </div>
+                            </div>
+    
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fas fa-tags"></i></span>
+                                        </div>
+                                        <input ng-model="data.dmdgroup" name="dmdgroup" type="text" class="form-control" placeholder="Dmdgroup">
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fas fa-tags"></i></span>
+                                        </div>
+                                        <input ng-model="data.mask_dmdgroup" name="mask_dmdgroup" type="text" class="form-control" placeholder="Mask Dmdgroup Prefix"
+                                            value="{{cbatres.form.mask_dmdgroup}}">
+                                    </div>
+                                </div>
+                            </div>
+    
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fas fa-map-marker-alt"></i></span>
+                                        </div>
+                                        <input ng-model="data.loc" name="loc" type="text" class="form-control" placeholder="Loc">
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fas fa-map-marker-alt"></i></span>
+                                        </div>
+                                        <input ng-model="data.mask_loc" name="mask_loc" type="text" class="form-control" placeholder="Mask Loc Prefix"
+                                            value="{{cbatres.form.mask_loc}}">
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-md-12" align="center"><span> - or - </span><br><br><h6><b>Custom SQL Query</b></h6></div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span id="custom-query-text" class="input-group-text">SELECT A.DMDUNIT FROM DMDUNIT A WHERE</span>
+                                    </div>
+                                    <input ng-model="data.customQueryCondn" name="customQueryCondn" type="text" class="form-control" placeholder="Custom Query">
+                                </div>
+                            </div>
+                            <hr>
+                            <!-- input states -->
+                            
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fas fa-users"></i></span>
+                                        </div>
+                                        <input ng-model="data.ora_username" name="ora_username" type="text" class="form-control" placeholder="Schema" 
+                                            value="{{cbatres.form.ora_username}}">
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span id="regex-form-input" class="input-group-text">REGEX UDC Exclude</span>
+                                        </div>
+                                        <input ng-model="data.regexUDC" name="regexUDC" type="text" class="form-control"
+                                            value="{{cbatres.form.regexUDC}}">
+                                    </div>
+                                </div>
+                            </div>
+    
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                                        </div>
+                                        <input ng-model="data.ora_password" name="ora_password" type="text" class="form-control" placeholder="Password"
+                                            value="{{cbatres.form.ora_password}}">
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <select ng-model="data.CDS_state" name="CDS_state" class="form-control">
+                                                <option selected="" value="CDS_disabled">CDS Disabled</option>
+                                                <option value="CDS_enabled">CDS Enabled</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+    
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fas fa-database"></i></span>
+                                        </div>
+                                        <input ng-model="data.ora_connectionString" name="ora_connectionString" type="text" class="form-control" placeholder="Connection String"
+                                            value="{{cbatres.form.ora_connectionString}}">
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <select ng-model="data.active_mode" name="active_mode" class="form-control">
+                                            <option selected="" value="BASE_PRICE">Base Price Co-eff Configuration</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.card-body -->
+                        <div class="card-footer">
+                            <button type="submit" class="btn btn-info" align="center">Generate Scripts</button>
+                            </div>
+                            <!-- /.card-footer -->
+                        </form>
+                    </div>
+                    <!-- /.card -->
+                </div>
+    
+                <div class="col-md-5">
+                    <div class="card card-info" id="processedfiles">
+                    <div class="overlay dark hide" id="processedfiles-spinner">
+                        <i class="fas fa-3x fas fa-cog fa-spin"></i>
+                    </div>
+                    <div class="card-header">
+                        <h3 class="card-title">Processed Output Files</h3>
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body table-responsive p-0" style="max-height: 600px;">
+                        <table class="table table-striped table-head-fixed text-nowrap m-0">
+                        <thead>
+                            <tr>
+                            <th style="width: 10px">#</th>
+                            <th>File</th>
+                            <th>Date</th>
+                            <th style="width: 40px">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="file in cbatres.filelist.files">
+                            <td>{{file.index + 1}}</td>
+                            <td><a href="{{file.path}}">{{file.file}}</a></td>
+                            <td>{{file.date}}</td>
+                            <td><a href="" ng-click="delete(file.file)"><span class="badge bg-danger">Delete</span></a></td>
+                            </tr>
+                        </tbody>
+                        </table>
+                    </div>
+                    <!-- /.card-body -->
+                    </div>
+                    <!-- /.card -->
+                </div>
+            </div>
+        </section>
+    </div>
